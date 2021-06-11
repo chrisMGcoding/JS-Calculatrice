@@ -40,6 +40,7 @@ divP.setAttribute("class", "principale");
 let input = document.createElement("input");
 divP.appendChild(input);
 input.setAttribute("class", "calcul");
+input.setAttribute("check", "ok");
 
 // création DIV chiffre + opérateurs
 
@@ -97,29 +98,36 @@ let allButton = Array.from(document.querySelectorAll("div"));
 
 let chiffreButton = allButton.splice(3, 12);
 
+let temp = "";
+let temp2 = "";
+
 chiffreButton.forEach(element => {
     element.addEventListener("click", () => {
-        input.value += element.textContent;
-    })
+        if (input.getAttribute("check") == "ok") {
+            temp += element.textContent;
+            input.value += element.textContent;
+            console.log(typeof temp)
+            console.log(temp);
+        }
+        else {
+            input.value = "";
+            temp2 += element.textContent;
+            input.value += element.textContent;
+            console.log(temp2);
+        }
+    });
 });
 
 // mise en place opérateur dynamique
 
 let operationButton = allButton.splice(4, 4);
 
-
-
 operationButton.forEach(element => {
     element.addEventListener("click", () => {
-        let temp = input.value;
+        input.setAttribute("check", "not ok");
         input.value = element.textContent;
-
     })
 })
 
 // mise en place résultat
-
-Equal.addEventListener("click", () => {
-    
-})
 
